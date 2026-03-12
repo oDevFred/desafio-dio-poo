@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 
+import dominio.Conteudo;
 import dominio.Curso;
 import dominio.Mentoria;
 
