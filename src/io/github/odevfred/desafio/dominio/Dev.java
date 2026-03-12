@@ -8,7 +8,7 @@ import java.util.Set;
 public class Dev {
     private String nome;
     private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
-    private Set<Conteudo> conteudoConluido = new LinkedHashSet<>();
+    private Set<Conteudo> conteudosConluidos = new LinkedHashSet<>();
 
     public String getNome() {
         return nome;
@@ -26,12 +26,12 @@ public class Dev {
         this.conteudosInscritos = conteudosInscritos;
     }
 
-    public Set<Conteudo> getConteudoConluido() {
-        return conteudoConluido;
+    public Set<Conteudo> getConteudosConluidos() {
+        return conteudosConluidos;
     }
 
-    public void setConteudoConluido(Set<Conteudo> conteudoConluido) {
-        this.conteudoConluido = conteudoConluido;
+    public void setConteudosConluidos(Set<Conteudo> conteudosConluidos) {
+        this.conteudosConluidos = conteudosConluidos;
     }
 
     @Override
@@ -45,12 +45,12 @@ public class Dev {
         Dev dev = (Dev) o;
         return Objects.equals(nome, dev.nome)
                 && Objects.equals(conteudosInscritos, dev.conteudosInscritos)
-                && Objects.equals(conteudoConluido, dev.conteudoConluido);
+                && Objects.equals(conteudosConluidos, dev.conteudosConluidos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, conteudosInscritos, conteudoConluido);
+        return Objects.hash(nome, conteudosInscritos, conteudosConluidos);
     }
 
     public void inscreverBootcamp(Bootcamp bootcamp) {
@@ -61,7 +61,7 @@ public class Dev {
     public void progredir() {
         Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
         if (conteudo.isPresent()) {
-            this.conteudoConluido.add(conteudo.get());
+            this.conteudosConluidos.add(conteudo.get());
             this.conteudosInscritos.remove(conteudo.get());
         } else {
             System.out.println("Você não está matriculado em nenhum conteúdo.");
@@ -69,7 +69,7 @@ public class Dev {
     }
 
     public double calcularTotalXp() {
-        return this.conteudoConluido.stream()
+        return this.conteudosConluidos.stream()
                                     .mapToDouble(conteudo -> conteudo.calcularXP())
                                     .sum();
     }
